@@ -27,9 +27,16 @@ public class MarkdownParse {
             if (nextValidCharacter == -1)
                 break;
 
-            int openParen = markdown.indexOf("(", nextValidCharacter);
-            if (openParen == -1)
+            nextValidCharacter = markdown.indexOf("]", nextValidCharacter);
+
+            int openParen = nextValidCharacter + 1;
+            if (openParen >= markdown.length())
                 break;
+            if (markdown.charAt(openParen) != '(') {
+                currentIndex = openParen;
+                continue;
+            }
+
             int closeParen = markdown.indexOf(")", openParen);
             if (closeParen == -1)
                 break;
