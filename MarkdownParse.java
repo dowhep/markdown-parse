@@ -15,10 +15,19 @@ public class MarkdownParse {
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
             if (nextOpenBracket == -1)
                 break;
-            int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
-            if (nextCloseBracket == -1)
+
+            int nextValidCharacter = nextOpenBracket;
+            while (markdown.substring(nextValidCharacter, markdown.indexOf("]", nextValidCharacter)).contains("\"")) {
+                nextValidCharacter = markdown.indexOf("\"", nextValidCharacter) + 1;
+                nextValidCharacter = markdown.indexOf("\"", nextValidCharacter) + 1;
+                if (nextValidCharacter == -1)
+                    break;
+            }
+
+            if (nextValidCharacter == -1)
                 break;
-            int openParen = markdown.indexOf("(", nextCloseBracket);
+
+            int openParen = markdown.indexOf("(", nextValidCharacter);
             if (openParen == -1)
                 break;
             int closeParen = markdown.indexOf(")", openParen);
