@@ -17,19 +17,41 @@ public class MarkdownParse {
                 break;
 
             int nextValidCharacter = nextOpenBracket;
-            while (markdown.substring(nextValidCharacter, markdown.indexOf("]", nextValidCharacter)).contains("\"")) {
-                nextValidCharacter = markdown.indexOf("\"", nextValidCharacter) + 1;
-                nextValidCharacter = markdown.indexOf("\"", nextValidCharacter) + 1;
-                if (nextValidCharacter == -1)
-                    break;
-            }
+            // while (markdown.substring(nextValidCharacter, markdown.indexOf("]", nextValidCharacter)).contains("\"")) {
+            //     nextValidCharacter = markdown.indexOf("\"", nextValidCharacter) + 1;
+            //     nextValidCharacter = markdown.indexOf("\"", nextValidCharacter) + 1;
+            //     if (nextValidCharacter == -1)
+            //         break;
+            // }
 
-            if (nextValidCharacter == -1)
+            // if (nextValidCharacter == -1)
+            //     break;
+
+            // nextValidCharacter = markdown.indexOf("]", nextValidCharacter);
+            // int openParen = nextValidCharacter + 1;
+            int lastCloseBracket = nextOpenBracket;
+            int potentialCloseBracket;
+            int quoteCount = 0;
+
+            do {
+                potentialCloseBracket = markdown.indexOf("]", lastCloseBracket + 1);
+                if (potentialCloseBracket == -1)
+                    break;
+                for (int i = lastCloseBracket + 1; i < potentialCloseBracket; i++) {
+                    if (markdown.charAt(i) == '\"') {
+                        quoteCount++;
+                    }
+                }
+                lastCloseBracket = potentialCloseBracket;
+            } while ((quoteCount & 1) == 1);
+
+            if (potentialCloseBracket == -1)
                 break;
 
-            nextValidCharacter = markdown.indexOf("]", nextValidCharacter);
+            // genious code above
 
-            int openParen = nextValidCharacter + 1;
+            int openParen = potentialCloseBracket + 1;
+
             if (openParen >= markdown.length())
                 break;
             if (markdown.charAt(openParen) != '(') {
