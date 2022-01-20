@@ -16,7 +16,7 @@ public class MarkdownParse {
             if (nextOpenBracket == -1)
                 break;
 
-            int nextValidCharacter = nextOpenBracket;
+            // int nextValidCharacter = nextOpenBracket;
             // while (markdown.substring(nextValidCharacter, markdown.indexOf("]", nextValidCharacter)).contains("\"")) {
             //     nextValidCharacter = markdown.indexOf("\"", nextValidCharacter) + 1;
             //     nextValidCharacter = markdown.indexOf("\"", nextValidCharacter) + 1;
@@ -29,6 +29,7 @@ public class MarkdownParse {
 
             // nextValidCharacter = markdown.indexOf("]", nextValidCharacter);
             // int openParen = nextValidCharacter + 1;
+
             int lastCloseBracket = nextOpenBracket;
             int potentialCloseBracket;
             int quoteCount = 0;
