@@ -40,7 +40,6 @@ public class MarkdownParseTest {
     @Test
     public void testImage() throws IOException {
         ArrayList<String> Image = new ArrayList<>();
-        Image.add("https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png");
         String ImageTest = MarkdownParse.converter("image.md");
         assertEquals(Image, MarkdownParse.getLinks(ImageTest));
     }
