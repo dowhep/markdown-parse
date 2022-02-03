@@ -24,26 +24,24 @@ public class MarkdownParseTest {
     @Test
     public void testCharacterAfter() throws IOException {
         ArrayList<String> CharacterAfter = new ArrayList<>();
-        CharacterAfter.add("google.com");
-        String CharacterAfterTest = MarkdownParse.converter("CharacterAfter.md");
+        CharacterAfter.add("https://something.com");
+        String CharacterAfterTest = MarkdownParse.converter("innocent-character.md");
         assertEquals(CharacterAfter, MarkdownParse.getLinks(CharacterAfterTest));
     }
 
     @Test
     public void testInBetween() throws IOException {
         ArrayList<String> InBetween = new ArrayList<>();
-        InBetween.add("hi.com");
-        InBetween.add("hi.com");
-        String InBetweenTest = MarkdownParse.converter("InBetween.md");
+        InBetween.add("https://something.com");
+        String InBetweenTest = MarkdownParse.converter("evil-quotation-marks.md");
         assertEquals(InBetween, MarkdownParse.getLinks(InBetweenTest));
     }
 
     @Test
     public void testImage() throws IOException {
         ArrayList<String> Image = new ArrayList<>();
-        Image.add("link.com");
-        Image.add("thiswebsite.com");
-        String ImageTest = MarkdownParse.converter("Image.md");
+        Image.add("https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png");
+        String ImageTest = MarkdownParse.converter("image.md");
         assertEquals(Image, MarkdownParse.getLinks(ImageTest));
     }
 
